@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+    {% block content %}
+    <h1>社員名簿一覧</h1>
+    <table border="1">
+        <tr>
+            <th>氏名</th>
+            <th>部署</th>
+            <th>詳細</th>
+            <th>入社日</th>
+        </tr>
+        {% for m in staff_members %}
+        <tr>
+            <td>
+                {% if m.role == 'マネージャー' %} 👑 <strong>{{ m.name }}</strong> {% else %} {{ m.name }} {% endif %}
+            </td>
+            <td>{{ m.dept }}</td>
+            <td><a href="{% url 'staff_detail' m.id %}">詳細を見る</a></td>
+            <td>{{ m.joined_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
